@@ -69,12 +69,14 @@ class Ahorro_programado_test(unittest.TestCase):
     
     def test_extraordinary_3(self):
         monto = 500000
-        interes = 0.1
+        interes = 1
         periodo = 12
 
         result = app.calcular_ahorro_programado(monto, interes, periodo)
         expected = 11999999
         self.assertAlmostEqual(expected, result, 2)
+    
+
     
 if __name__ == '__main__':
     unittest.main()

@@ -1,2 +1,2 @@
 def calcular_ahorro_programado(monto: float, interes: float, periodo: int):
-    return -1
+    return monto*(1+interes)*periodo-1/interes
