@@ -76,7 +76,37 @@ class Ahorro_programado_test(unittest.TestCase):
         expected = 11999999
         self.assertAlmostEqual(expected, result, 2)
     
+    def test_error_1(self):
+        monto = 300000
+        interes = -0.05
+        periodo = 12
 
+        with self.assertRaises( app.Invalidinterest ):
+            app.calcular_ahorro_programado( monto, interes, periodo )
+    
+    def test_error_2(self):
+        monto = 500000
+        interes = 0.06
+        periodo = -12
+
+        with self.assertRaises( app.Invalidmonths ):
+            app.calcular_ahorro_programado( monto, interes, periodo )
+    
+    def test_error_3(self):
+        monto = 600000
+        interes = 0
+        periodo = 24
+
+        with self.assertRaises( app.Invalidinterest ):
+            app.calcular_ahorro_programado( monto, interes, periodo )
+    
+    def test_error_4(self):
+        monto = 400000
+        interes = 1.5
+        periodo = 12
+
+        with self.assertRaises( app.Invalidinterest ):
+            app.calcular_ahorro_programado( monto, interes, periodo )
     
 if __name__ == '__main__':
     unittest.main()
