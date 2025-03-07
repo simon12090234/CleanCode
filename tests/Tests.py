@@ -1,5 +1,9 @@
 import unittest
-import app
+
+import sys 
+sys.path.append("src")
+
+from src.model import app
 
 
 class Programmed_savings_test(unittest.TestCase):
