@@ -5,12 +5,16 @@ class Invalidmonths(Exception):
     pass
 
 
-def calcular_ahorro_programado(monto: float, interes: float, periodo: int):
+def Calculate_programmed_savings(amount: float, interest: float, period: int):
 
-    if interes < 0.1 or interes > 1:
+    minimum = 0.01
+    maximus = 1
+
+    if interest < minimum or interest > maximus:
        raise Invalidinterest( "ERROR: La tasa de interes es invalida" )
     
-    if periodo < 1:
+    if period < maximus:
        raise Invalidmonths( "ERROR: El periodo es invalido" )
 
-    return monto*(1+interes)*periodo-1/interes
+    constant = 1
+    return amount * (constant + interest ) * period - constant / interest
