@@ -1,138 +1,37 @@
-# CleanCode
-Tests.py
+# Ahorro Programado
+# ¿Quién hizo esto?
+Juan Esteban Marín Villegas
+Tomás Mercado Ramos
 
-Nuestro proyecto consta de 12 pruebas unitarias
+# ¿Qué es y para qué es?
+El proposito de este proyecto es ayudarle a las persona a calcular de una manera más fácil y práctica el monto que van ahorrar con el ahorro programado
 
-Integrantes:
-Tomás Mercado
-Juan Esteban Marín
+# ¿Cómo lo hago funcionar?
+Prerrequisitos: 
 
-Definicion de variables
--Monto = Es la cantidad de dinero que se deposita en la cuenta de ahorro al principio
+Antes de correr el proyecto debes tener el conocimiento de la couta que se va dar mensual, el interés que se va aplicar y el numero de cuotas que se darán.
 
--Tasa de interés = Es el porcentaje que se aplicará al saldo inicial para calcular los intereses
+Ejecución:
+Ubicados en la carpeta raiz del proyecto, ejecute:
 
-Periodo: Es el número de meses en los que se realizará el cálculo de los intereses
+py src\view\console.py
 
-Caso 1
-	Entradas
-	monto = 300000
-        interes = 0.035
-        periodo = 24
+# ¿Cómo está hecho?
+La organización de los módulos es la siguiente:
 
-	Salida
-		 7451971.429
+En la carpeta src tenemos otras sub carpetas que son controller, model y view. Model contiene dos archivos, el obligatorio que es __init__.py y app.py que es donde está toda la lógica del proyecto. Controller solo contiene el archivo obligatorio __init__.py. Y view tiene un archivo que se llama console.py que contiene todo el código para tener interacción con el usuario por medio de la consola.
 
-Caso 2
-	Entradas
-	monto = 500000
-        interes = 0.06
-        periodo = 36
-	
-	Salida
-		19079983.33
+En la carpeta tests hay dos archivos casos de pruebas.xlsx y Tests.py. Casos de pruebas.xlsx es un excel con todos los casos de pruebs que nos fueron solicitados. Y Tests.py tiene todas las pruebas unitarias con sabe en esos casos de prueba.
 
+# Estructura sugerida
+Carpeta src: Codigo fuente de la logica de la aplicación. Tiene subcarpetas por cada capa de la aplicacion
+Carpeta tests: Pruebas Unitarias
 
-Caso 3
-	Entradas
-	monto = 1000000
-        interes = 0.1
-        periodo = 60
-	
-	Salida
-		65999990
+# Uso
+Para ejecutar las pruebas unitarias, desde la carpeta raiz, use el comando
 
-Caso 4
-	Entradas
-	monto = 250000
-        interes = 0.05
-        periodo = 1
-	
-	Salida
-		262480
-Caso 5
-	Entrada
-	monto = 200000
-        interes = 0.045
-        periodo = 12
+py tests\Tests.py 
 
-	Salida
-		2507977.778
+Para poder ejecutarlas desde la carpeta raiz, debe indicar la ruta de busqueda donde se encuentran los módulos, incluyendo las siguientes lineas al inicio del módulo de pruebas
 
-CASOS EXTRAORDINARIOS
-		
-Caso 6
-	Entradas
-	monto = 1000000
-        interes = 0.02
-        periodo = 1
-
-	
-	Salidas
-		1019950
-
-Caso 7
-	Entradas
-	monto = 200000
-        interes = 0.05
-        periodo = 600
-
-	
-	Salidas
-		125999980
-
-Caso 8
-	Entradas
-	monto = 500000
-        interes = 1
-        periodo = 12
-
-	
-	Salidas
-		11999999
-
-
-CASOS ERRONEOS
-
-Caso 9
-	Entradas
-	monto = 300000
-        interes = -0.05
-        periodo = 12
-
-	
-	Salidas
-		Error: tasa invalida
-
-
-Caso 10
-	Entradas
-	monto = 500000
-        interes = 0.06
-        periodo = -12
-
-	
-	Salidas
-		Error: meses invalidos
-
-
-Caso 11
-	Entradas
-	monto = 600000
-        interes = 0
-        periodo = 24
-
-	
-	Salidas
-		Error: 	Tasa de interes del 0%
-
-
-Caso 12
-	Entradas
-	monto = 300000
-        interes = 1,5
-        periodo = 12
-
-	
-	Salidas
-	Error: tasa de interes mayor al 100%
+import sys sys.path.append("src")
