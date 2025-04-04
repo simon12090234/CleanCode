@@ -4,11 +4,8 @@ from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
 
-import sys
-import os
-from model.app import Calculate_programmed_savings, Invalidinterest, Invalidmonths
+from ..model import app
 
-sys.path.append(os.path.join(os.path.dirname(__file__), '../../'))
 
 class SavingsCalculator(BoxLayout):
     def __init__(self, **kwargs):
@@ -33,20 +30,22 @@ class SavingsCalculator(BoxLayout):
     def calculate(self, instance):
         amount = self.amount_input.text
         months = self.months_input.text
-        interest = self.interest_input.text/100
+        interest = self.interest_input.text / 100
 
         try:
             amount = float(amount)
             months = int(months)
             interest = float(interest)
-            result = Calculate_programmed_savings(amount, interest, months)
+            result = app.Calculate_programmed_savings(amount, interest, months)
             self.result_label.text = f"Ahorro Total: {result:.2f}"
-        except (ValueError, Invalidinterest, Invalidmonths) as e:
+        except (ValueError, app.Invalidinterest, app.Invalidmonths) as e:
             self.result_label.text = f"Error: {str(e)}"
+
 
 class SavingsApp(App):
     def build(self):
         return SavingsCalculator()
+
 
 if __name__ == "__main__":
     SavingsApp().run()
