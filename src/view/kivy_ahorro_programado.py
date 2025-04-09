@@ -34,14 +34,11 @@ class SavingsCalculator(BoxLayout):
         self.add_widget(self.result_label)
 
     def calculate(self, instance):
-        amount = self.amount_input.text
-        months = self.months_input.text
-        interest = self.interest_input.text / 100
-
         try:
-            amount = float(amount)
-            months = int(months)
-            interest = float(interest)
+            amount = float(self.amount_input.text)
+            months = int(self.months_input.text)
+            interest = float(self.interest_input.text)
+
             result = app.Calculate_programmed_savings(amount, interest, months)
             self.result_label.text = f"Ahorro Total: {result:.2f}"
         except (ValueError, app.Invalidinterest, app.Invalidmonths) as e:
