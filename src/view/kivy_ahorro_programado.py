@@ -3,8 +3,14 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
+import sys
+import os
 
-from ..model import app
+
+# Agrega la carpeta raíz del proyecto al sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
+from src.model import app  # <- Ahora esto funcionará
 
 
 class SavingsCalculator(BoxLayout):
