@@ -6,16 +6,13 @@ from kivy.uix.button import Button
 import sys
 import os
 
-
-# Agrega la carpeta raíz del proyecto al sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
-from src.model import app  # <- Ahora esto funcionará
-
+from src.model import app 
 
 class SavingsCalculator(BoxLayout):
     def __init__(self, **kwargs):
-        super().__init__(orientation='vertical', **kwargs)
+        super().__init__(orientation='vertical', padding = 10, spacing = 10, **kwargs)
 
         self.amount_input = TextInput(hint_text="Ingrese la cantidad de ahorro mensual", multiline=False)
         self.add_widget(self.amount_input)
