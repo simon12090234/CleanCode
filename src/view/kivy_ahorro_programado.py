@@ -30,16 +30,24 @@ class SavingsCalculator(BoxLayout):
         self.result_label = Label(text="Resultado aparecerá aquí")
         self.add_widget(self.result_label)
 
-    def calculate(self, instance):
-        try:
-            amount = float(self.amount_input.text)
-            months = int(self.months_input.text)
-            interest = float(self.interest_input.text) / 100
+            def calculate(self, instance):
+                try:
+                    amount = float(self.amount_input.text)
+                    if amount <= 0:
+                        raise ValueError("La cantidad de ahorro debe ser mayor a 0.")
 
-            result = app.Calculate_programmed_savings(amount, interest, months)
-            self.result_label.text = f"Ahorro Total: {result:.2f}"
-        except (ValueError, app.Invalidinterest, app.Invalidmonths) as e:
-            self.result_label.text = f"Error: {str(e)}"
+                    months = int(self.months_input.text)
+                    if months <= 0:
+                        raise app.Invalidmonths("La cantidad de meses debe ser mayor a 0.")
+
+                    interest = float(self.interest_input.text) / 100
+                    if interest < 0 or interest > 100:
+                        raise app.Invalidinterest("La tasa de interés debe estar entre 0 y 100.")
+
+                    result = app.Calculate_programmed_savings(amount, interest, months)
+                    self.result_label.text = f"Ahorro Total: {result:.2f}"
+                except (ValueError, app.Invalidinterest, app.Invalidmonths) as e:
+                    self.result_label.text = f"Error: {str(e)}"
 
 
 class SavingsApp(App):
