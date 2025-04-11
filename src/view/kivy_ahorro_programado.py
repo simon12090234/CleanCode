@@ -17,7 +17,7 @@ class RoundedBoxLayout(BoxLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         with self.canvas.before:
-            Color(0.95, 0.95, 0.95, 1)  
+            Color(0.95, 0.95, 0.95, 1)
             self.rect = RoundedRectangle(radius=[0], size=self.size, pos=self.pos)
         self.bind(size=self._update_rect, pos=self._update_rect)
 
@@ -57,12 +57,12 @@ class SavingsCalculator(RoundedBoxLayout):
             color=(1, 1, 1, 1),
             size_hint=(1, None),
             height=50,
-            background_normal='',  
+            background_normal='',
         )
         with self.calculate_button.canvas.before:
-            Color(0.27, 0.24, 0.56, 1)  
+            Color(0.27, 0.24, 0.56, 1)
             self.calculate_button_rect = RoundedRectangle(
-            radius=[14],  
+            radius=[14],
             size=self.calculate_button.size,
             pos=self.calculate_button.pos
             )
@@ -73,11 +73,12 @@ class SavingsCalculator(RoundedBoxLayout):
         self.calculate_button.bind(on_press=self.calculate)
         self.add_widget(self.calculate_button)
 
-        self.result_label = Label(text="Resultado aparecerá aquí", color=(0.12, 0.12, 0.12, 1)) 
+        self.result_label = Label(text="Resultado aparecerá aquí", color=(0.12, 0.12, 0.12, 1))  # Color #1E1E1E
+        self.add_widget(self.result_label)
 
     def show_error_popup(self, message):
         content = BoxLayout(orientation='vertical', padding=10, spacing=10)
-        content.add_widget(Label(text=message, color=(1, 0, 0, 1)))  
+        content.add_widget(Label(text=message, color=(1, 0, 0, 1)))  # Red color for error
         close_button = Button(text="Cerrar", background_color=(0.27, 0.24, 0.56, 1), color=(1, 1, 1, 1))
         content.add_widget(close_button)
 

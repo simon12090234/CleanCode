@@ -16,7 +16,7 @@ def Calculate_programmed_savings(amount: float, interest: float, period: int):
     if interest <= minimum or interest > maximus:
        raise Invalidinterest( "ERROR: La tasa de interes es invalida" )
     
-    if period < maximus:
+    if period > maximus:
        raise Invalidmonths( "ERROR: El periodo es invalido" )
 
     constant = 1
