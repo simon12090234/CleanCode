@@ -14,14 +14,26 @@ class SavingsCalculator(BoxLayout):
     def __init__(self, **kwargs):
         super().__init__(orientation='vertical', padding = 10, spacing = 10, **kwargs)
 
+        amount_layout = BoxLayout(orientation='horizontal', spacing=10)
+        amount_label = Label(text="Cantidad mensual:")
         self.amount_input = TextInput(hint_text="Ingrese la cantidad de ahorro mensual", multiline=False)
-        self.add_widget(self.amount_input)
+        amount_layout.add_widget(amount_label)
+        amount_layout.add_widget(self.amount_input)
+        self.add_widget(amount_layout)
 
+        months_layout = BoxLayout(orientation='horizontal', spacing=10)
+        months_label = Label(text="Cantidad de meses:")
         self.months_input = TextInput(hint_text="Ingrese la cantidad de meses", multiline=False)
-        self.add_widget(self.months_input)
+        months_layout.add_widget(months_label)
+        months_layout.add_widget(self.months_input)
+        self.add_widget(months_layout)
 
+        interest_layout = BoxLayout(orientation='horizontal', spacing=10)
+        interest_label = Label(text="Cantidad de meses:")
         self.interest_input = TextInput(hint_text="Ingrese la tasa de interes", multiline=False)
-        self.add_widget(self.interest_input)
+        interest_layout.add_widget(interest_label)
+        interest_layout.add_widget(self.interest_input)
+        self.add_widget(interest_layout)
 
         self.calculate_button = Button(text="Calcular Ahorro")
         self.calculate_button.bind(on_press=self.calculate)
@@ -30,24 +42,24 @@ class SavingsCalculator(BoxLayout):
         self.result_label = Label(text="Resultado aparecerá aquí")
         self.add_widget(self.result_label)
 
-            def calculate(self, instance):
-                try:
-                    amount = float(self.amount_input.text)
-                    if amount <= 0:
-                        raise ValueError("La cantidad de ahorro debe ser mayor a 0.")
+    def calculate(self, instance):
+        try:
+            amount = float(self.amount_input.text)
+            if amount <= 0:
+                raise ValueError("La cantidad de ahorro debe ser mayor a 0.")
 
-                    months = int(self.months_input.text)
-                    if months <= 0:
-                        raise app.Invalidmonths("La cantidad de meses debe ser mayor a 0.")
+            months = int(self.months_input.text)
+            if months <= 0:
+                raise app.Invalidmonths("La cantidad de meses debe ser mayor a 0.")
 
-                    interest = float(self.interest_input.text) / 100
-                    if interest < 0 or interest > 100:
-                        raise app.Invalidinterest("La tasa de interés debe estar entre 0 y 100.")
+            interest = float(self.interest_input.text) / 100
+            if interest < 0 or interest > 100:
+                raise app.Invalidinterest("La tasa de interés debe estar entre 0 y 100.")
 
-                    result = app.Calculate_programmed_savings(amount, interest, months)
-                    self.result_label.text = f"Ahorro Total: {result:.2f}"
-                except (ValueError, app.Invalidinterest, app.Invalidmonths) as e:
-                    self.result_label.text = f"Error: {str(e)}"
+            result = app.Calculate_programmed_savings(amount, interest, months)
+            self.result_label.text = f"Ahorro Total: {result:.2f}"
+        except (ValueError, app.Invalidinterest, app.Invalidmonths) as e:
+            self.result_label.text = f"Error: {str(e)}"
 
 
 class SavingsApp(App):
