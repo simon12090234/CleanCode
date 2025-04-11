@@ -3,16 +3,17 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
+from kivy.uix.popup import Popup
 import sys
 import os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
-from src.model import app 
+from src.model import app
 
 class SavingsCalculator(BoxLayout):
     def __init__(self, **kwargs):
-        super().__init__(orientation='vertical', padding = 10, spacing = 10, **kwargs)
+        super().__init__(orientation='vertical', padding=30, spacing=10, **kwargs)
 
         self.amount_input = TextInput(hint_text="Ingrese la cantidad de ahorro mensual", multiline=False)
         self.add_widget(self.amount_input)
@@ -30,24 +31,37 @@ class SavingsCalculator(BoxLayout):
         self.result_label = Label(text="Resultado aparecerá aquí")
         self.add_widget(self.result_label)
 
-            def calculate(self, instance):
-                try:
-                    amount = float(self.amount_input.text)
-                    if amount <= 0:
-                        raise ValueError("La cantidad de ahorro debe ser mayor a 0.")
+    def show_error_popup(self, message):
+        content = BoxLayout(orientation='vertical', padding=10, spacing=10)
+        content.add_widget(Label(text=message))
+        close_button = Button(text="Cerrar")
+        content.add_widget(close_button)
 
-                    months = int(self.months_input.text)
-                    if months <= 0:
-                        raise app.Invalidmonths("La cantidad de meses debe ser mayor a 0.")
+        popup = Popup(title="Error", content=content, size_hint=(0.8, 0.4))
+        close_button.bind(on_press=popup.dismiss)
+        popup.open()
 
-                    interest = float(self.interest_input.text) / 100
-                    if interest < 0 or interest > 100:
-                        raise app.Invalidinterest("La tasa de interés debe estar entre 0 y 100.")
+    def calculate(self, instance):
+        MinimunValue = 0
+        PercentageConvertor = 100
+        MaximunValue = 64
+        try:
+            amount = float(self.amount_input.text)
+            if amount <= MinimunValue:
+                raise ValueError("La cantidad de ahorro debe ser mayor a 0.")
 
-                    result = app.Calculate_programmed_savings(amount, interest, months)
-                    self.result_label.text = f"Ahorro Total: {result:.2f}"
-                except (ValueError, app.Invalidinterest, app.Invalidmonths) as e:
-                    self.result_label.text = f"Error: {str(e)}"
+            months = int(self.months_input.text)
+            if months <= MinimunValue:
+                raise app.Invalidmonths("La cantidad de meses debe ser mayor a 0.")
+
+            interest = float(self.interest_input.text) / PercentageConvertor
+            if interest < MinimunValue or interest > MaximunValue:
+                raise app.Invalidinterest("La tasa de interés debe estar entre 0 y 100.")
+
+            result = app.Calculate_programmed_savings(amount, interest, months)
+            self.result_label.text = f"Ahorro Total: {result:.2f}"
+        except (ValueError, app.Invalidinterest, app.Invalidmonths) as e:
+            self.show_error_popup(str(e))
 
 
 class SavingsApp(App):
