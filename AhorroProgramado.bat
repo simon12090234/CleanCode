@@ -1,21 +1,34 @@
 @echo off
-REM This script builds the Kivy application executable for Windows using PyInstaller.
+setlocal
 
-REM Navigate to the project directory
-cd /d "%~dp0"
+set VENV_DIR=kivy_env
+set VENV_PATH=%~dp0%VENV_DIR%
 
-REM Install required packages
-pip install -r requirements.txt
+where python >nul 2>nul
+if errorlevel 1 (
+    echo ❌ Python no está instalado.
+    pause
+    exit /b 1
+)
 
-REM Build the executable using PyInstaller
-pyinstaller --onefile --windowed KivyApp.py
+if not exist "%VENV_PATH%\Scripts\activate.bat" (
+    echo 📦 Creando entorno virtual...
+    python -m venv "%VENV_PATH%"
+)
 
-REM Move the executable to the desired location
-move dist\main.exe .
+call "%VENV_PATH%\Scripts\activate.bat"
 
-REM Clean up build files
-rmdir /s /q build
-rmdir /s /q dist
-del main.spec
+pip install --upgrade pip
+pip install "kivy[base]" pyinstaller
 
-echo Build complete! The executable is located in the project root directory.
+pyinstaller --noconfirm --onefile --windowed KivyApp.py
+
+if exist dist\KivyApp.exe (
+    move /Y dist\KivyApp.exe dist\MiAppKivy.exe >nul
+    echo ✅ Ejecutable creado: dist\MiAppKivy.exe
+) else (
+    echo ❌ Error al generar el ejecutable
+)
+
+endlocal
+pause

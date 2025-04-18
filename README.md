@@ -8,6 +8,36 @@ Tomás Mercado Ramos
 * Juan José Becerra Bedoya
 * Simon Correa Bravo
 
+
+## ¿Como ejecutar la interfaz gráfica desde Linux?
+
+    Unicamente con dos comandos se puede utilizar la aplicacion de ahorro programado:
+
+    Se dan los permisos necesarios par que el archivo pueda ejecutarse
+
+    chmod +x ./AhorroProgramado.sh
+
+    Se Inicializa el archivo
+
+    ./AhorroProgramado.sh
+
+    Nota: Esto debe ser ejecutado desde la carpeta raiz del archivo
+
+
+## ¿Cómo ejecutar la interfaz gráfica desde Windows?
+
+    Para utilizar la aplicación de ahorro programado en Windows, siga estos pasos:
+
+    Asegúrese de que el archivo `.bat` se encuentra en la carpeta raíz del proyecto.
+
+    Ejecute el archivo `.bat` haciendo doble clic sobre él o desde la línea de comandos con:
+
+        ```
+        AhorroProgramado.bat
+        ```
+
+    Nota: Esto debe ser ejecutado desde la carpeta raíz del proyecto para que funcione correctamente.
+
 # ¿Qué es y para qué es?
 El proposito de este proyecto es ayudarle a las persona a calcular de una manera más fácil y práctica el monto que van ahorrar con el ahorro programado
 
