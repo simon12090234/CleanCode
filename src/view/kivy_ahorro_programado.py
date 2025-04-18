@@ -112,7 +112,3 @@ class SavingsCalculator(RoundedBoxLayout):
 class SavingsApp(App):
     def build(self):
         return SavingsCalculator()
-
-
-if __name__ == "__main__":
-    SavingsApp().run()
